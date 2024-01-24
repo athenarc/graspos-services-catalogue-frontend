@@ -58,7 +58,7 @@ export class HomeAireComponent implements OnInit {
       }
     );
 
-    this.resourceService.getResourcesGroupedByField('portfolios').subscribe(
+    this.resourceService.getResourcesGroupedByField('portfolios', true).subscribe(
       res => {this.resources = res; },
       error => {console.log(error); }
     );

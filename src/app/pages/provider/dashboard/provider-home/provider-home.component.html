@@ -6,72 +6,114 @@
 
         <div class="uk-width-2-3">
           <div class="uk-card uk-card-default uk-card-body">
-            <div>
+            <div class="uk-margin-medium-bottom">
               <h6 class="uk-margin-small-bottom">Services</h6>
               <ul uk-tab="connect: #top-navigation-tabs; animation: uk-animation-fade"
                   class="uk-width-1-1 uk-margin-remove uk-tab form-tabs">
-                <li class=""><a href="#" aria-expanded="true"><span>Recent</span></a></li>
-                <li class=""><a href="#" aria-expanded="false"><span>Approved</span></a></li>
-                <li class=""><a href="#" aria-expanded="false"><span>Pending</span></a></li>
-                <li class=""><a href="#" aria-expanded="false"><span>Rejected</span></a></li>
+                <li class="uk-padding-remove-left"><a href="#" aria-expanded="true"><span>Recent</span></a></li>
+                <li class="uk-padding-remove-left"><a href="#" aria-expanded="false"><span>Approved</span></a></li>
+                <li class="uk-padding-remove-left"><a href="#" aria-expanded="false"><span>Pending</span></a></li>
+                <li class="uk-padding-remove-left"><a href="#" aria-expanded="false"><span>Rejected</span></a></li>
               </ul>
             </div>
             <ul id="top-navigation-tabs" class="uk-switcher" style="touch-action: pan-y pinch-zoom;">
               <ul class="uk-list uk-list-divider">
                 <ng-container *ngIf="resourceBundles?.length==0">No services</ng-container>
                 <ng-container *ngFor="let resource of resourceBundles; let i = index;">
-                  <li *ngIf="i < 5">
-                    <span>{{getPayload(resource).name}}</span>
-<!--                  <span class="">{{resource.latestUpdateInfo.date}}</span>-->
-                    <span class="uk-align-right">{{resource.status}}</span>
-                  </li>
+                  <div class="resource-list" *ngIf="i < 5">
+                    <div class="resource-info name-overflow">{{getPayload(resource).name}}</div>
+                    <div class="resource-info" style="padding-left: 20px">{{resource.latestUpdateInfo.date | date: 'dd MMM yyyy'}}</div>
+                    <div class="resource-info status-column">
+                      <div *ngIf="resource?.active === false" class="inactive">
+                        <div class="uk-label uk-margin-small-right">Inactive</div>
+                      </div>
+                      <div *ngIf="resource?.status==='approved resource'" class="approved">
+                        <div class="uk-label">Approved</div>
+                      </div>
+                      <div *ngIf="resource?.status==='pending resource'" class="pending">
+                        <div class="uk-label">Pending</div>
+                      </div>
+                      <div *ngIf="resource?.status==='rejected resource'" class="rejected">
+                        <div class="uk-label">Rejected</div>
+                      </div>
+                    </div>
+                  </div>
                 </ng-container>
               </ul>
               <ul class="uk-list uk-list-divider">
                 <ng-container *ngIf="approvedResourceBundles?.length==0">No approved services</ng-container>
                 <ng-container *ngFor="let resource of approvedResourceBundles; let i = index;">
-                  <li *ngIf="i < 5">
-                    <span>{{getPayload(resource).name}}</span><span class="uk-align-right">{{resource.status}}</span>
-                  </li>
+                  <div class="resource-list" *ngIf="i < 5">
+                    <div class="resource-info name-overflow">{{getPayload(resource).name}}</div>
+                    <div class="resource-info" style="padding-left: 20px">{{resource.latestUpdateInfo.date | date: 'dd MMM yyyy'}}</div>
+                    <div class="resource-info status-column">
+                      <div *ngIf="resource?.active === false" class="inactive">
+                        <div class="uk-label uk-margin-small-right">Inactive</div>
+                      </div>
+                      <div class="approved">
+                        <div class="uk-label">Approved</div>
+                      </div>
+                    </div>
+                  </div>
                 </ng-container>
               </ul>
               <ul class="uk-list uk-list-divider">
                 <ng-container *ngIf="pendingResourceBundles?.length==0">No pending services</ng-container>
                 <ng-container *ngFor="let resource of pendingResourceBundles; let i = index;">
-                  <li *ngIf="i < 5">
-                    <span>{{getPayload(resource).name}}</span><span class="uk-align-right">{{resource.status}}</span>
-                  </li>
+                  <div class="resource-list" *ngIf="i < 5">
+                    <div class="resource-info name-overflow">{{getPayload(resource).name}}</div>
+                    <div class="resource-info" style="padding-left: 20px">{{resource.latestUpdateInfo.date | date: 'dd MMM yyyy'}}</div>
+                    <div class="resource-info status-column">
+                      <div *ngIf="resource?.active === false" class="inactive">
+                        <div class="uk-label uk-margin-small-right">Inactive</div>
+                      </div>
+                      <div class="pending">
+                        <div class="uk-label">Pending</div>
+                      </div>
+                    </div>
+                  </div>
                 </ng-container>
               </ul>
               <ul class="uk-list uk-list-divider">
                 <ng-container *ngIf="rejectedResourceBundles?.length==0">No rejected services</ng-container>
                 <ng-container *ngFor="let resource of rejectedResourceBundles; let i = index;">
-                  <li *ngIf="i < 5">
-                    <span>{{getPayload(resource).name}}</span><span class="uk-align-right">{{resource.status}}</span>
-                  </li>
+                  <div class="resource-list" *ngIf="i < 5">
+                    <div class="resource-info name-overflow">{{getPayload(resource).name}}</div>
+                    <div class="resource-info" style="padding-left: 20px">{{resource.latestUpdateInfo.date | date: 'dd MMM yyyy'}}</div>
+                    <div class="resource-info status-column">
+                      <div *ngIf="resource?.active === false" class="inactive">
+                        <div class="uk-label uk-margin-small-right">Inactive</div>
+                      </div>
+                      <div class="rejected">
+                        <div class="uk-label">Rejected</div>
+                      </div>
+                    </div>
+                  </div>
                 </ng-container>
               </ul>
             </ul>
+            <div class="uk-margin-medium-top">
+              <a *ngIf="resourceBundles?.length>0"
+                 [routerLink]="['/provider/' + provider.id + '/dashboard/services']"
+                 class="uk-link">Show more...</a>
+            </div>
           </div>
 
-          <div *ngIf="loggingInfo.length>0" class="uk-margin-large-top">
+          <div *ngIf="loggingInfo?.length>0" class="uk-margin-large-top">
             <div class="uk-card uk-card-default uk-card-body">
               <h6 class="uk-margin-medium-bottom">Recent history of updates</h6>
               <ul class="uk-list uk-list-divider">
                 <ng-container *ngFor="let log of loggingInfo; let i = index;">
-                  <li>{{log.type | titlecase}} - {{log.actionType | titlecase}}<span class="uk-align-right">Update: {{log.date}}</span>
-<!--                  <li *ngIf="i < 4">{{log.type | titlecase}} - {{log.actionType | titlecase}}<span class="uk-align-right">Update: {{log.date}}</span>-->
-<!--                  <span>{{log.type - log.actionType}}</span><span class="uk-align-right">Update: {{log.date | date:'dd/MM/yyyy'}}</span>-->
-<!--                  <span>{{log.type - log.actionType}}</span><span class="uk-align-right">Update: {{formatLogDate(log.date)}}</span>-->
+                  <li>
+                    {{log.type | titlecase}} - {{log.actionType | titlecase}}<span class="uk-align-right">Update: {{formatLogDate(log.date)}}</span>
                   </li>
                 </ng-container>
               </ul>
-<!--              <ng-container *ngIf="loggingInfo.length > 4 && !showMaxRecords" class="uk-margin-top">-->
-<!--                <a>Show more...</a>-->
-<!--              </ng-container>-->
-<!--              <ng-container *ngIf="loggingInfo.length > 4 && showMaxRecords" class="uk-margin-top">-->
-<!--                <a>Show less...</a>-->
-<!--              </ng-container>-->
+              <div class="uk-margin-medium-top">
+                <a *ngIf="loggingInfo?.length>0"
+                   [routerLink]="['/provider/' + provider.id + '/dashboard/updateHistory']"
+                   class="uk-link">Show more...</a>
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 <div *ngIf="!ready" class="uk-margin-large-top" style="height: 400px">
   <div class="loader-big"></div>
 </div>
-<div *ngIf="ready" class="uk-visible@m">
+<div *ngIf="ready && !cleanView" class="uk-visible@m">
   <div class=" tm-header uk-visible@m tm-header-transparent service-menu">
     <div class="uk-navbar-container uk-sticky uk-navbar-transparent" uk-sticky="top:0" media="768"
     cls-active="uk-active uk-navbar-sticky" style="" animation="uk-animation-slide-top"
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div *ngIf="ready" class="uk-hidden@m" uk-sticky="offset: 90">
+<div *ngIf="ready && !cleanView" class="uk-hidden@m" uk-sticky="offset: 90">
   <!--MOBILE & PAD PORTRAIT-->
   <ul class="uk-tab service-tabs" data-uk-tab="{connect:'#team_tabbed',animation: 'slide-bottom'}">
     <li [ngClass]="{'uk-active': path === 'overview'}"><a [routerLink]="'./overview'" class="service-menu-item">Overview</a></li>
@@ -61,11 +61,11 @@
   </ul>
 </div>
 
-<div class="uk-hidden@m uk-float-right" style="z-index: 100; bottom: 30px; position: fixed; right: 30px;">
+<div *ngIf="!cleanView" class="uk-hidden@m uk-float-right" style="z-index: 100; bottom: 30px; position: fixed; right: 30px;">
   <button (click)="goto(resourcePayload.webpage)" class="uk-button uk-button-blue">Go to service</button>
 </div>
 
-<div *ngIf="(projectName=='OpenAIRE Catalogue') && canAddOrEditService"
+<div *ngIf="(projectName=='OpenAIRE Catalogue') && canAddOrEditService && !cleanView"
      class="uk-float-right" style="z-index: 100; top: 300px; position: fixed; right: 5px;">
   <a [routerLink]="['/edit/', id]" style="padding: 10px;" class="uk-icon-button uk-button-primary">
     <i class="fa fa-pencil-square-o"></i>

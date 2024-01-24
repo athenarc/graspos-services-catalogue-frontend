@@ -123,7 +123,8 @@ export class ResourceService {
     return this.http.get<Service>(this.base + `/service/${version === undefined ? id : [id, version].join('/')}`, this.options);
   }
 
-  getResourcesGroupedByField(field: string) {
+  getResourcesGroupedByField(field: string, active?: boolean) {
+    if (active) return this.http.get<Map<string, Service[] | Datasource[]>>(this.base + `/catalogue-resources/by/${field}?active=true`);
     return this.http.get<Map<string, Service[] | Datasource[]>>(this.base + `/catalogue-resources/by/${field}`);
   }
 

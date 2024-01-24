@@ -4,7 +4,7 @@ import {Bundle, Datasource, LoggingInfo, Provider, ProviderBundle, Service, Serv
 import {ProviderService} from '../../../../services/provider.service';
 import {ResourceService} from '../../../../services/resource.service';
 import {DatePipe} from '@angular/common';
-import {Paging} from '../../../../entities/paging';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-provider-home',
@@ -22,16 +22,16 @@ export class ProviderHomeComponent implements OnInit, OnChanges {
   pendingResourceBundles: ServiceBundle[] = null;
   rejectedResourceBundles: ServiceBundle[] = null;
 
-  // showMaxRecords: false;
-  // maxRecords = 30;
-
-  constructor(private providerService: ProviderService, private resourceService: ResourceService, private datePipe: DatePipe) {
+  constructor(private router: Router, private providerService: ProviderService, private resourceService: ResourceService, private datePipe: DatePipe) {
   }
 
   ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
     this.resourceService.getUiVocabularies().subscribe(
       res => {this.vocabularies = res}
     );
+
     if (this.providerBundle) {
       this.provider = this.providerBundle.provider;
       this.loggingInfo = this.providerBundle.loggingInfo;
@@ -67,6 +67,11 @@ export class ProviderHomeComponent implements OnInit, OnChanges {
       if (vocabulary.id === id)
         return vocabulary.name;
     }
+  }
+
+  formatLogDate(logDate: string): string {
+    const dateObject = moment(logDate, 'ddd MMM DD HH:mm:ss Z YYYY');
+    return dateObject.format('DD MMM YYYY');
   }
 
 }

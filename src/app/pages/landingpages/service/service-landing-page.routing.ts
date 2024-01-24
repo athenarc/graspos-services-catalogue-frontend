@@ -39,6 +39,10 @@ const serviceLandingPageRoutes: Routes = [
       {
         path: 'changeLog',
         component: ChangeLogComponent,
+      },
+      {
+        path: 'changeLogClean',
+        component: ChangeLogComponent,
       }
     ],
     runGuardsAndResolvers: 'always'

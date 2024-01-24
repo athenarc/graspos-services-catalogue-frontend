@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
 
   breadcrumbs: string[] = [];
 
+  cleanView = false;
+  dashboardView = false;
+
   constructor(public router: Router, private auth: AuthenticationService) {
     this.auth.redirect();
   }
@@ -22,10 +25,11 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((evt: any) => {
       if (evt.url) {
+        this.cleanView = evt.url.includes('/changeLogClean');
+        this.dashboardView = evt.url.includes('/dashboard');
         this.breadcrumbs = evt.url.split(/\//);
       }
       this.breadcrumbs[0] = 'Home';
-
       // this.isLoginOrRegister = ["/signUp", "/signIn"].indexOf(evt.url) >= 0;
     });
 
@@ -37,8 +41,4 @@ export class AppComponent implements OnInit {
     });
   }
 
-  isDashboardRoute() {
-    // console.log('Is home route? Route is: ' + this.router.url);
-    return (this.router.url.includes('/dashboard'));
-  }
 }

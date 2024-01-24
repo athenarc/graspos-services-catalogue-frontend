@@ -22,5 +22,6 @@ export const environment = {
     tracesSampleRate: 1.0,
     replaysSessionSampleRate: 0.2,
     replaysOnErrorSampleRate: 1.0
-  }
+  },
+  disableSentry: false
 };

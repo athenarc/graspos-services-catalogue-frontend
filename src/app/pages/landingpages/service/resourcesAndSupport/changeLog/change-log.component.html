@@ -1,7 +1,7 @@
 <div *ngIf="resourcePayload" class="uk-section uk-section-primary uk-preserve-color">
-  <div class="uk-container uk-container-small uk-margin-large-top">
+  <div class="uk-container uk-container-small">
 
-    <div class="uk-grid uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-2@l">
+    <div class="uk-grid uk-child-width-1-1@s uk-child-width-1-2@m uk-child-width-1-2@l uk-padding-remove-top">
       <h2>Change Log</h2>
     </div>
 
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="uk-margin-top">
+    <div *ngIf="!cleanView" class="uk-margin-top">
       <a class="uk-button uk-button-text" [routerLink]="['../resourcesAndSupport']">back</a>
     </div>
 

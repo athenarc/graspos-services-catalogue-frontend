@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {Provider, Service, URL} from '../../../entities/eic-model';
 import {AuthenticationService} from '../../../services/authentication.service';
@@ -26,12 +26,14 @@ export class ServiceLandingPageComponent implements OnInit, OnDestroy {
 
   relatedServices: Service[] = null;
   resourcePayload: Service = null;
+  cleanView = false;
 
-  constructor(public route: ActivatedRoute, public resourceService: ResourceService, private authenticationService: AuthenticationService) {
+  constructor(public router: Router, public route: ActivatedRoute, public resourceService: ResourceService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
     this.ready = false;
+    this.cleanView = this.router.url.includes('/changeLogClean');
 
     this.subscriptions.push(
       this.route.params.subscribe(
