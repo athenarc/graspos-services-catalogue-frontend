@@ -770,5 +770,5 @@ main-banner {
     justify-content: center;
     align-items: center;
     
-    background: linear-gradient(to top, #3204fdba, #9907facc), url("assets/images/main-banner.jpg") no-repeat top center;
+    background: linear-gradient(to top, #3204fdba, #9907facc), url("../../../assets/images/main-banner.jpg") no-repeat top center;
   }
