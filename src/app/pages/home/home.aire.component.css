@@ -761,7 +761,14 @@ a.serviceLink:hover {
     }
 }
 
-
-
-
-
+main-banner {
+    height: 100vh;
+    width: 100%;
+    color: white;
+    font: bold 6.5em/2em monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background: linear-gradient(to top, #3204fdba, #9907facc), url("assets/images/main-banner.jpg") no-repeat top center;
+  }
